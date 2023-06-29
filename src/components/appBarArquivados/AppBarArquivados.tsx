@@ -10,19 +10,16 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
-import routes, { routesArquivados } from '../../routes/routes';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { clearUserLogged } from '../../store/modules/users/loginSlice';
-// import { clearUserLogged } from '../../store/modules/users/usersSlice5';
+import { routesArquivados } from '../../routes/routes';
+import { useAppSelector } from '../../store/hooks';
+
 
 
 function AppBarArquivados() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const userLogged = useAppSelector(state => state.loginSlice);
-  // const recadosRedux = useAppSelector(buscarTodosRecados);
-  const dispatch = useAppDispatch();
-
   const navigate = useNavigate();
+  
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -30,9 +27,6 @@ function AppBarArquivados() {
 
   const updatedUser = (url: string) => {
     console.log('Clicou no link esta no meu ResponsiveAppBar', url);
-    // dispatch(atualizarUser({ id: userLogged, changes: { recados: recadosRedux } }));
-    // dispatch(clearUserLogged());
-    // dispatch(deletarTodos());
     navigate(url);
   };
 

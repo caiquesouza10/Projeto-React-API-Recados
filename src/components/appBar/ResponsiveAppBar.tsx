@@ -14,12 +14,10 @@ import routes from '../../routes/routes';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { clearUserLogged } from '../../store/modules/users/loginSlice';
 import ArchiveIcon from '@mui/icons-material/Archive';
-// import { clearUserLogged } from '../../store/modules/users/usersSlice5';
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const userLogged = useAppSelector(state => state.loginSlice);
-  // const recadosRedux = useAppSelector(buscarTodosRecados);
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
@@ -30,10 +28,7 @@ function ResponsiveAppBar() {
 
   const updatedUser = (url: string) => {
     console.log('Clicou no link esta no meu ResponsiveAppBar', url);
-    // dispatch(atualizarUser({ id: userLogged, changes: { recados: recadosRedux } }));
-
     dispatch(clearUserLogged());
-    // dispatch(deletarTodos());
     navigate(url);
   };
 

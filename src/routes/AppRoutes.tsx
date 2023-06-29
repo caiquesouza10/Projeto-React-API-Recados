@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import DefaultLayout from '../config/layout/DefaultLayout';
-import WelcomeLayout from '../config/layout/WelcomeLayout';
 import TesteLogin from '../pages/login/Login';
 import TesteCadastro from '../pages/cadastro/Cadastro';
 import HomeRecado from '../pages/recado/HomeRecado';

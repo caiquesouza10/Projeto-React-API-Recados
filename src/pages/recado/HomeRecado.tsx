@@ -44,7 +44,7 @@ const HomeRecado: React.FC = () => {
 
 
   useEffect(() => {
-    if (!userLogged) {
+    if (!userLogged.id) {
       navigate('/');
     }
   }, [userLogged]);
@@ -107,7 +107,6 @@ const HomeRecado: React.FC = () => {
 
   const handleArquivar = (itemArquivado: RecadosType) => {
     if(itemArquivado) {
-      // dispatch(atualizarRecadosUser({ id, changes: { title: detailEdit, description: descriptionEdit } }));
       dispatch(atualizarRecadosUser({
         idRecado: itemArquivado.id , idUser: userLogged.id,
         description: itemArquivado.description,

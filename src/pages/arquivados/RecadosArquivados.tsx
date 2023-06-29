@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {
   Grid,
   IconButton,
@@ -10,20 +10,14 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  TextField,
   Typography
 } from '@mui/material';
-import { Botao } from '../../components/botao/Botao';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
 import UnarchiveIcon from '@mui/icons-material/Unarchive';
-import ArchiveIcon from '@mui/icons-material/Archive';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { atualizarRecadosUser, buscarTodosRecados, listarRecadosUser, recadosUserArquivados } from '../../store/modules/recados/recadosSlice';
-import Swal from 'sweetalert2';
+import { atualizarRecadosUser, recadosUserArquivados } from '../../store/modules/recados/recadosSlice';
+// import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
-import Recados, { ArquivarRecadoUser, AtualizarRecadoType } from '../../types/RecadosType';
-import Modal from '../../components/modal/modal';
+import { ArquivarRecadoUser } from '../../types/RecadosType';
 import RecadosType from '../../types/RecadosType';
 
 
@@ -32,14 +26,11 @@ const RecadosArquivados: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const userLogged = useAppSelector(state => state.loginSlice);
- 
-  const recadosRedux = useAppSelector(buscarTodosRecados);
   const recadosArquivados: any = useAppSelector((state) => state.recados.arquivados);
 
 
-
   useEffect(() => {
-    if (!userLogged) {
+    if (!userLogged.id) {
       navigate('/');
     }
   }, [userLogged]);
@@ -55,7 +46,6 @@ const RecadosArquivados: React.FC = () => {
   const handleDesarquivar = (itemArquivado: RecadosType) => {
     console.log('Clicou em arquivar');
     if(itemArquivado) {
-      // dispatch(atualizarRecadosUser({ id, changes: { title: detailEdit, description: descriptionEdit } }));
       dispatch(atualizarRecadosUser({
         idRecado: itemArquivado.id , idUser: userLogged.id,
         description: itemArquivado.description,

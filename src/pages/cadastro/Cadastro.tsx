@@ -74,16 +74,16 @@ const Cadastro: React.FC = () => {
     );
 
     clearInput();
-    Swal.fire({
-      title: 'Sucesso!',
-      text: 'Usuario cadastro com sucesso',
-      icon: 'success',
-      confirmButtonText: 'Confirmar',
-      timer: 2000
-    });
-    setTimeout(() => {
-      navigate('/');
-    }, 3000);
+    // Swal.fire({
+    //   title: 'Sucesso!',
+    //   text: 'Usuario cadastro com sucesso',
+    //   icon: 'success',
+    //   confirmButtonText: 'Confirmar',
+    //   timer: 2000
+    // });
+    // setTimeout(() => {
+    //   navigate('/');
+    // }, 3000);
   };
 
   const clearInput = () => {

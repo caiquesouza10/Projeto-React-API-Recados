@@ -50,7 +50,6 @@ const recadosSlice = createSlice({
     adicionarRecado: adapter.addOne,
     atualizarRecado: adapter.updateOne,
     deletarRecado: adapter.removeOne,
-    // deletarTodos: adapter.removeAll,
     adicionarTodosRecados: adapter.setAll
   },
   extraReducers(builder) {
