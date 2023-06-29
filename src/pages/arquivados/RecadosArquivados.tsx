@@ -19,10 +19,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import UnarchiveIcon from '@mui/icons-material/Unarchive';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { atualizarRecadosUser, buscarTodosRecados, criarRecadosUser, deletarRecado, deletarRecadosUser, desarquivarRecadosUser, listarRecadosUser } from '../../store/modules/recados/recadosSlice';
+import { atualizarRecadosUser, buscarTodosRecados, listarRecadosUser, recadosUserArquivados } from '../../store/modules/recados/recadosSlice';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
-import Recados, { AtualizarRecadoType } from '../../types/RecadosType';
+import Recados, { ArquivarRecadoUser, AtualizarRecadoType } from '../../types/RecadosType';
 import Modal from '../../components/modal/modal';
 import RecadosType from '../../types/RecadosType';
 
@@ -34,6 +34,8 @@ const RecadosArquivados: React.FC = () => {
   const userLogged = useAppSelector(state => state.loginSlice);
  
   const recadosRedux = useAppSelector(buscarTodosRecados);
+  const recadosArquivados: any = useAppSelector((state) => state.recados.arquivados);
+
 
 
   useEffect(() => {
@@ -45,26 +47,13 @@ const RecadosArquivados: React.FC = () => {
 
   useEffect(() => {
     if (userLogged.id) {
-      dispatch(listarRecadosUser(userLogged.id));
+      dispatch(recadosUserArquivados({ idUser: userLogged.id } as ArquivarRecadoUser));
     }
-  }, []);
+  }, [dispatch, userLogged.id]);
 
-  // useEffect(() => {
-  //   dispatch(desarquivarRecadosUser({ id: userLogged, changes: { recados: recadosRedux } }));
-  // }, [recadosRedux]);
-
-  // const handleDesarquivar = (itemArquivado: RecadosType ) => {
-  //   console.log('Clicou em arquivar');
-
-  //   dispatch(desarquivarRecadosUser({
-  //     idRecado: itemArquivado.id, idUser: userLogged.id,
-  //     arquivado: true
-  //   }));
-  // };
-
+ 
   const handleDesarquivar = (itemArquivado: RecadosType) => {
     console.log('Clicou em arquivar');
-
     if(itemArquivado) {
       // dispatch(atualizarRecadosUser({ id, changes: { title: detailEdit, description: descriptionEdit } }));
       dispatch(atualizarRecadosUser({
@@ -74,9 +63,8 @@ const RecadosArquivados: React.FC = () => {
         arquivado: false
       }));
     }
-
+    window.location.reload();
     console.log(itemArquivado);
-    
   };
 
   return (
@@ -113,7 +101,7 @@ const RecadosArquivados: React.FC = () => {
             </TableHead>
 
             <TableBody style={{ backgroundColor: '#43385e' }}>
-              {recadosRedux.map((recado, index) => (
+              {recadosArquivados.map((recado:any, index: any) => (
                 <TableRow sx={{ border: '1px solid #fff' }} key={recado.id}>
                   <TableCell align="center" sx={{ color: 'white', border: '1px solid #fff' }}>
                     {index + 1}

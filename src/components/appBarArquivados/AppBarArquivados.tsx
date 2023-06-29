@@ -51,7 +51,7 @@ function AppBarArquivados() {
               color: '#ffffff'
             }}
           >
-            Olá! Bem vindo a sua Pagina de Recados Arquivados :{' '}
+            Olá! : {' '}
             <i style={{ marginLeft: '20px', fontFamily: 'sans-serif', fontWeight: '900' }}> { userLogged.name }</i>
           </Typography>
 

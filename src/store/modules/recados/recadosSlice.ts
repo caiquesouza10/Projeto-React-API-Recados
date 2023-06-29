@@ -24,8 +24,11 @@ export const atualizarRecadosUser = createAsyncThunk('recado/atualizarRecadosUse
   return result;
 });
 
-export const desarquivarRecadosUser = createAsyncThunk('recado/desarquivarRecadosUser', async (props: ArquivarRecadoUser) => {
-  const result = await apiUpdate(`/user/${props.idUser}/recados/arquivados`, props);
+export const recadosUserArquivados = createAsyncThunk('recado/recadosUserArquivados', async (props: ArquivarRecadoUser) => {
+  const result = await apiGet(`/user/${props.idUser}/recados/arquivados`);
+
+  console.log(result);
+  
   return result;
 });
 
@@ -42,7 +45,7 @@ export const { selectAll: buscarTodosRecados, selectById: buscarRecadoPorId } = 
 
 const recadosSlice = createSlice({
   name: 'recados',
-  initialState: adapter.getInitialState({ ok: false, message: '' }),
+  initialState: adapter.getInitialState({ ok: false, message: '',  arquivados: [] }),
   reducers: {
     adicionarRecado: adapter.addOne,
     atualizarRecado: adapter.updateOne,
@@ -87,14 +90,13 @@ const recadosSlice = createSlice({
       state.message = action.payload.message;
     });
 
-    // builder.addCase(desarquivarRecadosUser.fulfilled, (state, action) => {
-    //   const { sucesso, mensagem } = action.payload;
-    //   if(action.payload.ok){
-    //     adapter.setAll(state, action.payload.data);
-    //   }
-    //   state.ok = sucesso;
-    //   state.message = mensagem;
-    // });
+    builder.addCase(recadosUserArquivados.fulfilled, (state, action: PayloadAction<InitialStateUser>) => {
+      if(action.payload.ok){
+        state.arquivados = action.payload.data;
+      }
+      state.ok = action.payload.ok;
+      state.message = action.payload.message;
+    });
   }
 });
 

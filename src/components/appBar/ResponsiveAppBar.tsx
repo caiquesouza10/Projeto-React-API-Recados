@@ -118,7 +118,12 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: { md: 'flex-end' } }}>
             {routes.map(page => (
               <>
-                <IconButton sx={{ marginRight: '30px' }} edge="end" aria-label="delete" onClick={() => irPraRecadosArquivados()}>
+                <IconButton
+                  sx={{ marginRight: '30px' }}
+                  edge="end"
+                  aria-label="delete"
+                  onClick={() => irPraRecadosArquivados()}
+                >
                   <ArchiveIcon sx={{ color: '#ffffff' }} />
                 </IconButton>
 
